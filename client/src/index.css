@@ -1,0 +1,113 @@
+/* navbar styles */
+.nav_container {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.nav_button {
+  width: 90px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.run_workflow_link{
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  background-color: #fafa07;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* dnd styles */
+.dndflow {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+}
+
+/* save workflow section */
+.save_flow{
+  
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(247, 212, 212);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  
+}
+
+.saveFlow_button{
+  background-color: #0041d0;
+  color: white;
+  height: 35px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+.dndflow aside {
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+  background: #fcfcfc;
+}
+
+.dndflow aside .description {
+  margin-bottom: 10px;
+}
+
+.dndflow .dndnode {
+  height: 20px;
+  padding: 4px;
+  border: 1px solid #1a192b;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+}
+
+.dndflow .dndnode.input {
+  border-color: #0041d0;
+}
+
+.dndflow .dndnode.output {
+  border-color: #ff0072;
+}
+
+.dndflow .reactflow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.dndflow .selectall {
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
+  }
+
+  .dndflow aside {
+    width: 20%;
+    max-width: 250px;
+  }
+}
