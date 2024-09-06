@@ -13,16 +13,15 @@ const App = () => {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/login", element: <Login /> },
-        { path: "/register", element: <Register /> },
-      ],
-    },
-    {
-      path: "/",
-      element: <RequireAuth />,
-      children: [
-        { path: "/", element: <DnDFlow /> },
-        { path: "/flow", element: <Flow /> },
+        { path: "login", element: <Login /> },
+        { path: "register", element: <Register /> },
+        {
+          element: <RequireAuth />, // Protect the following routes
+          children: [
+            { path: "/", element: <DnDFlow /> },
+            { path: "flow", element: <Flow /> },
+          ],
+        },
       ],
     },
   ]);

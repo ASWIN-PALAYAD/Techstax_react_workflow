@@ -1,11 +1,13 @@
 
-import  { useState } from 'react';
+import  { useContext, useState } from 'react';
 import '../styles/register.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { updateUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -22,9 +24,10 @@ const Login = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, formData,{
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, formData,{
         withCredentials:true
       });
+      updateUser(res.data)
       alert('logged successfully');
       navigate('/')
     } catch (error) {
