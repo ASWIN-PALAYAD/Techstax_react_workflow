@@ -1,17 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineMenu } from "react-icons/md";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../redux/userSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { currentUser,updateUser } = useContext(AuthContext);
-  
+
+  const currentUser = useSelector((state)=>state.user.currentUser)
+  const dispatch = useDispatch();
+
   const handleLogout = () => {
-    localStorage.removeItem("work_flow_token")
-    updateUser('')
-    navigate('/login');
-  }
+    localStorage.removeItem("work_flow_token");
+    dispatch(updateUser(''))
+    navigate("/login");
+  };
 
   return (
     <div className="nav_container">
@@ -20,15 +22,25 @@ const Navbar = () => {
       </Link>
       <h2>Workflow Builder</h2>
       {currentUser && (
-
-      <Link className="run_workflow_link" >
-        Run Workflow
-      </Link>
+        <Link className="run_workflow_link" to={"/upload"}>
+          Run Workflow
+        </Link>
       )}
-      {currentUser == null ? (
-        <button className="nav_button" style={{backgroundColor:"red",color:"white"}}>Login</button>
+      {!currentUser ? (
+        <button
+          className="nav_button"
+          style={{ backgroundColor: "green", color: "white" }}
+        >
+          Login
+        </button>
       ) : (
-        <button className="nav_button" style={{backgroundColor:"green", color:'white'}} onClick={handleLogout}>Logout</button>
+        <button
+          className="nav_button"
+          style={{ backgroundColor: "red", color: "white" }}
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
       )}
     </div>
   );

@@ -73,15 +73,20 @@ const DnDFlow = () => {
   const saveWorkflow = async () => {
     const workflow = { nodes, edges };
     try {
-      await axios.post('http://localhost:5000/api/workflows', workflow);
-      alert('Workflow saved');
+      const res = await axios.post("http://localhost:5000/api/flow", workflow);
+      setEdges([])
+      setNodes([])
+      alert("Workflow saved");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="dndflow" style={{ width: "100%", height: 'calc(100vh - 100px)'  }}>
+    <div
+      className="dndflow"
+      style={{ width: "100%", height: "calc(100vh - 100px)" }}
+    >
       <Sidebar />
       <div className="reactflow-wrapper" ref={reactFlowWrapper}>
         <ReactFlow
@@ -96,7 +101,9 @@ const DnDFlow = () => {
         >
           <div className="save_flow">
             <p>workflow Id: afoafaoalfa</p>
-            <button onClick={saveWorkflow} className="saveFlow_button">Save Workflow</button>
+            <button onClick={saveWorkflow} className="saveFlow_button">
+              Save Workflow
+            </button>
           </div>
           <Controls />
           <Background color="red" />

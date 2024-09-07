@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout, RequireAuth } from "./pages/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Flow from "./pages/Flow";
+import UploadData from "./pages/UploadData";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -19,7 +19,7 @@ const App = () => {
           element: <RequireAuth />, // Protect the following routes
           children: [
             { path: "/", element: <DnDFlow /> },
-            { path: "flow", element: <Flow /> },
+            { path: "/upload", element: <UploadData/> },
           ],
         },
       ],

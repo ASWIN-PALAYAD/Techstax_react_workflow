@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+
+import { useSelector } from "react-redux";
 
 const Layout = () => {
   return (
@@ -17,7 +17,8 @@ const Layout = () => {
 };
 
 const RequireAuth = () => {
-  const { currentUser } = useContext(AuthContext);
+
+  const currentUser = useSelector((state)=>state.user.currentUser)
 
   return !currentUser ? (
     <Navigate to={"/login"} />

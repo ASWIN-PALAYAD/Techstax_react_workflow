@@ -1,13 +1,15 @@
 
-import  { useContext, useState } from 'react';
+import  { useState } from 'react';
 import '../styles/register.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { AuthContext } from '../context/AuthContext';
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../redux/userSlice';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { updateUser } = useContext(AuthContext);
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -27,7 +29,8 @@ const Login = () => {
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, formData,{
         withCredentials:true
       });
-      updateUser(res.data)
+      console.log(res.data);
+      dispatch(updateUser(res.data))
       alert('logged successfully');
       navigate('/')
     } catch (error) {
