@@ -19,10 +19,9 @@ export const registerUSer = async (req, res) => {
 
     res.status(200).json({message:"user registered successfully"})
 
-    return res.status(200).send({ messag: "User registered successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: "somthing went wrong" });
+    res.status(500).send({ message: "somthing went wrong" });  
   }
 };
 

@@ -1,18 +1,18 @@
-
-import  { useState } from 'react';
-import '../styles/register.css'
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { updateUser } from '../redux/userSlice';
+import { useState } from "react";
+import "../styles/register.css";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../redux/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -23,27 +23,32 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, formData,{
-        withCredentials:true
-      });
-      console.log(res.data);
-      dispatch(updateUser(res.data))
-      alert('logged successfully');
-      navigate('/')
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(updateUser(res.data));
+      alert("logged successfully");
+      navigate("/");
     } catch (error) {
       console.error(error);
+      setError(error.response.data.message);
     }
   };
 
   return (
-    <div className='main_container'>
+    <div className="main_container">
       <div className="login-container">
         <h2>Login Page</h2>
+
         <form onSubmit={handleSubmit}>
-         
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
@@ -66,9 +71,19 @@ const Login = () => {
               required
             />
           </div>
+          {error && (<p style={{color:"red"}}>{error}</p>)}
           <button type="submit">Login</button>
-          <p>Dont have an Account ? <Link to={'/register'}> Register here </Link></p>
+          <p>
+            Dont have an Account ? <Link to={"/register"}> Register here </Link>
+          </p>
         </form>
+        <div>
+          <span style={{ color: "red" }}>
+            For testing purpose you can use <br />
+            email : aswin@g.com, <br />
+            password: 12345
+          </span>
+        </div>
       </div>
     </div>
   );

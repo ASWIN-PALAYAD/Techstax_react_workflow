@@ -27,8 +27,6 @@ export const runFlow = async (req, res) => {
     const jsonArray = await csvtojson().fromFile(csvFilePath);
     console.log(jsonArray);
     
-    
-  
     for (const node of workflow.nodes) {
       switch (node.type) {
         case 'Filter Data':

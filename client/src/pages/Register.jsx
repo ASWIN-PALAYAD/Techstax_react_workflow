@@ -26,7 +26,7 @@ const Register = () => {
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, formData,{
         withCredentials:true
       });
-      alert('Workflow saved');
+      alert('user registered successfully');
       navigate('/login')
     } catch (error) {
       console.error(error);

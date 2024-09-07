@@ -10,6 +10,7 @@ export const userSlice = createSlice({
   reducers: {
     
     updateUser: (state, action) => {
+      localStorage.setItem("work_flow_token", JSON.stringify(action.payload))
       state.currentUser = action.payload
     },
   },
